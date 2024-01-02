@@ -8,7 +8,7 @@ Stop the scrolling, use Stream Buddy, a Python application that searches The Mov
 
 ### User Stories
 
-![Draw Io](code/phase-3/project/stream-buddy/app.png)
+![Draw Io](app.png)
 
 ### Kanban Board
 https://trello.com/b/2JTT5q2M/stream-buddy
