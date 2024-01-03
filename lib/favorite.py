@@ -62,6 +62,7 @@ class Favorite:
            SELECT * FROM favorites;
            """
            rows = CURSOR.execute(sql).fetchall() 
+           #DON'T NEED CONN.COMMT() BECAUSE NOTHIG IS BEING UPDATED JUST READING DATA
            #turn list into list of instances 
            return [cls.favorite_instance(row) for row in rows]
 
@@ -74,6 +75,7 @@ class Favorite:
             SELECT * FROM favorites WHERE id=?;
         """
         row = CURSOR.execute(sql, (id, )).fetchone() 
+        #DON'T NEED CONN.COMMT() BECAUSE NOTHIG IS BEING UPDATED JUST READING DATA
         if not row:
             return None
         else:
@@ -81,7 +83,8 @@ class Favorite:
 
     #deleting instance aka row by id
     #again need class because I am working with the whole class
-    def delete_by_id(cls,id):
+    @classmethod
+    def delete_by_id(cls, id):
         sql = """ 
         DELETE FROM favorites WHERE id=?;
         """
@@ -109,13 +112,13 @@ if __name__ == "__main__":
 
 
     #add data to the favorites table
-    #favorite_instance = Favorite(movie_name='Movie1', rating=5)
+    #favorite_instance = Favorite(movie_name='AAA', rating=5)
     #favorite_instance.saving_favorite_data()
 
-    #favorite_instance = Favorite(movie_name='Movie2', rating=2)
+    #favorite_instance = Favorite(movie_name='BBB', rating=2)
     #favorite_instance.saving_favorite_data()
 
-    #favorite_instance = Favorite(movie_name='Movie3', rating=1)
+    #favorite_instance = Favorite(movie_name='CCC', rating=1)
     #favorite_instance.saving_favorite_data()
 
     #it works!
@@ -130,23 +133,28 @@ if __name__ == "__main__":
 
     # it works!
     # Testing get_by_id
-    #retrieved_favorite = Favorite.find_favorite_by_id(3)
+    #retrieved_favorite = Favorite.find_favorite_by_id(2)
     #if retrieved_favorite:
         #print(f"Favorite with id 3: {retrieved_favorite.__dict__}")
     #else:
         #print("Favorite not found.")
 
     # Testing delete_by_id
-    favorite_id_to_delete = 3
+    # Print all instances before deletion - run this to see list before deleting one
+    #print("Before Deletion:")
+    #for fav in Favorite.get_all():
+        #print(f"ID: {fav.id}, Movie Name: {fav.movie_name}, Rating: {fav.rating}")
+    
+    # It works!
+    # Choosing the ID I want to delete
+    favorite_id_to_delete = 2
+
+    # Delete the instance with the specified ID
     Favorite.delete_by_id(favorite_id_to_delete)
 
-    # Print remaining favorites
-    remaining_favorites = Favorite.get_all()
-    
-    if remaining_favorites:
-        for favorite in remaining_favorites:
-            print(f"Favorite instance: {favorite.__dict__}")
-    else:
-        print("No favorites found.")
+    # Print all instances after deletion
+    print("\nAfter Deletion:")
+    for fav in Favorite.get_all():
+        print(f"ID: {fav.id}, Movie Name: {fav.movie_name}, Rating: {fav.rating}")
     
 
