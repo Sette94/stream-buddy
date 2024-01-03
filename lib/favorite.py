@@ -67,9 +67,9 @@ class Favorite:
 
 
     #getting instance aka row by id
-    #need class methos because I am working with the whole class
+    #need class method because I am working with the whole class
     @classmethod
-    def find_by_id(cls, id):
+    def find_favorite_by_id(cls, id):
         sql = """ 
             SELECT * FROM favorites WHERE id=?;
         """
@@ -78,6 +78,15 @@ class Favorite:
             return None
         else:
             return cls.favorite_instance(row)
+
+    #deleting instance aka row by id
+    #again need class because I am working with the whole class
+    def delete_by_id(cls,id):
+        sql = """ 
+        DELETE FROM favorites WHERE id=?;
+        """
+        CURSOR.execute(sql, (id, ))
+        CONN.commit()
 
 '''
     def add_user(self, user):
@@ -111,20 +120,33 @@ if __name__ == "__main__":
 
     #it works!
     # Testing get_all
-    all_favorites = Favorite.get_all()
+    #all_favorites = Favorite.get_all()
 
-    if all_favorites:
-        for favorite in all_favorites:
-            print(f"Favorite instance: {favorite.__dict__}")
-    else:
-        print("No favorites found.")
+    #if all_favorites:
+        #for favorite in all_favorites:
+            #print(f"Favorite instance: {favorite.__dict__}")
+    #else:
+        #print("No favorites found.")
 
     # it works!
     # Testing get_by_id
-    #retrieved_favorite = Favorite.find_by_id(3)
+    #retrieved_favorite = Favorite.find_favorite_by_id(3)
     #if retrieved_favorite:
         #print(f"Favorite with id 3: {retrieved_favorite.__dict__}")
     #else:
         #print("Favorite not found.")
+
+    # Testing delete_by_id
+    favorite_id_to_delete = 3
+    Favorite.delete_by_id(favorite_id_to_delete)
+
+    # Print remaining favorites
+    remaining_favorites = Favorite.get_all()
+    
+    if remaining_favorites:
+        for favorite in remaining_favorites:
+            print(f"Favorite instance: {favorite.__dict__}")
+    else:
+        print("No favorites found.")
     
 
