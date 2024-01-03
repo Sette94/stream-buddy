@@ -41,14 +41,30 @@ class User:
         CURSOR.execute(sql,(self.first_name, self.last_name, self.age))
         CONN.commit()
 
-
+    #need to debug
+    #@classmethod
+    #def get_user_by_id(cls, user_id):
+        #sql = "SELECT * FROM users WHERE id = ?"
+        #CURSOR.execute(sql, (user_id, ))
+        #user_data = CURSOR.fetchone()
+        #if user_data:
+            #return cls(*user_data)
+        #return None
+    
 if __name__ == "__main__":
     #User.create_table()
     #User.drop_table()
 
- # Create an instance of the User class and add data to the users table
-    user_instance = User(first_name='John', last_name='Doe', age=25)
-    user_instance.user_data()
+    #Create an instance of the User class and add data to the users table
+    #user_instance = User(first_name='John', last_name='Doe', age=25)
+    #user_instance.user_data()
+    #user_instance = User(first_name='Jane', last_name='Doe', age=30)
+    #user_instance.user_data()
+    
+
+    #need to debug
+    #grabbing user by id
+    #existing_user = User.get_user_by_id(1)
 
 
 
