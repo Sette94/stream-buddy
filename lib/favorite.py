@@ -1,5 +1,8 @@
 from connection import CONN, CURSOR
 
+#from user import User
+
+
 class Favorite:
     def __init__(self, movie_name, rating, user_id=None, id=None):
         self.movie_name = movie_name
@@ -42,14 +45,29 @@ class Favorite:
         )
         return favorite 
 
-    def favorite_data(self):
+    def saving_favorite_data(self):
         sql = """
             INSERT INTO favorites(movie_name, rating, user_id)
             VALUES(?, ?, ?);
         """
-        CURSOR.execute(sql,(self.movie_name, self.rating, self.user_id))
+        CURSOR.execute(sql, (self.movie_name, self.rating, self.user_id))
         CONN.commit()
+        self.id = CURSOR.lastrowid
 
+    #getting instance aka row by id
+    #need class methos because I am working with the whole class
+    @classmethod
+    def find_by_id(cls, id):
+        sql = """ 
+            SELECT * FROM favorites WHERE id=?;
+        """
+        row = CURSOR.execute(sql, (id, )).fetchone() 
+        if not row:
+            return None
+        else:
+            return cls.favorite_instance(row)
+
+'''
     def add_user(self, user):
         try:
             sql = """ 
@@ -60,13 +78,27 @@ class Favorite:
             self.user_id = user.id
         except Exception as e:
             print(f'Something went wrong: {e}')
-
+'''
 if __name__ == "__main__":
-    Favorite.create_table()
+    
+    #Favorite.create_table()
     #Favorite.drop_table()
 
-# add data to the users table
-    favorite_instance = Favorite(movie_name='Test', rating=5)
-    favorite_instance.favorite_data()
-    favorite1 = Favorite(movie_name='Need For Speed', rating=4)
-    favorite1.add_user(1)
+
+    #add data to the favorites table
+    #favorite_instance = Favorite(movie_name='Movie1', rating=5)
+    #favorite_instance.saving_favorite_data()
+
+    #favorite_instance = Favorite(movie_name='Movie2', rating=2)
+    #favorite_instance.saving_favorite_data()
+
+    #favorite_instance = Favorite(movie_name='Movie3', rating=1)
+    #favorite_instance.saving_favorite_data()
+
+    # it works!
+    # Test get_by_id
+    retrieved_favorite = Favorite.find_by_id(3)
+    if retrieved_favorite:
+        print(f"Favorite with id 3: {retrieved_favorite.__dict__}")
+    else:
+        print("Favorite not found.")
