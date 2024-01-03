@@ -44,7 +44,7 @@ class Favorite:
 
     def favorite_data(self):
         sql = """
-            INSERT INTO users(movie_name, rating, user_id)
+            INSERT INTO favorites(movie_name, rating, user_id)
             VALUES(?, ?, ?);
         """
         CURSOR.execute(sql,(self.movie_name, self.rating, self.user_id))
