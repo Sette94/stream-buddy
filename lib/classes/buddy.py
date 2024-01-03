@@ -84,7 +84,8 @@ class Buddy:
             # Make each cell in the "Poster" column clickable with the corresponding URL
             for i, cell_value in enumerate(row):
                 if columns[i] == "Poster":
-                    cell_text = "https://image.tmdb.org/t/p/original"+cell_value
+                    cell_text = "https://image.tmdb.org/t/p/original" + \
+                        cell_value if cell_value is not None else "No Poster Availiable"
                     row[i] = cell_text
                 else:
                     row[i] = cell_value
@@ -116,7 +117,8 @@ class Buddy:
             # Make each cell in the "Poster" column clickable with the corresponding URL
             for i, cell_value in enumerate(row):
                 if columns[i] == "Poster":
-                    cell_text = "https://image.tmdb.org/t/p/original"+cell_value
+                    cell_text = "https://image.tmdb.org/t/p/original" + \
+                        cell_value if cell_value is not None else "No Poster Availiable"
                     row[i] = cell_text
                 else:
                     row[i] = cell_value
@@ -127,13 +129,13 @@ class Buddy:
         console.print(table)
 
 
-buddy_instance = Buddy(streaming_service="Netflix")
-movies_data = buddy_instance.movies_in_streaming(
-    genre_name="Comedy", year="", actor_name="")
-buddy_instance.display_table_movies(movies_data)
+if __name__ == '__main__':
+    buddy_instance = Buddy(streaming_service="Netflix")
+    # movies_data = buddy_instance.movies_in_streaming(
+    #     genre_name="Comedy", year="", actor_name="")
+    # buddy_instance.display_table_movies(movies_data)
 
-
-# tv_data = buddy_instance.tv_in_streaming(
-#     year="2022", genre_name="Comedy"
-# )
-# buddy_instance.display_table_tv(tv_data)
+    tv_data = buddy_instance.tv_in_streaming(
+        year="1999", genre_name="Comedy"
+    )
+    buddy_instance.display_table_tv(tv_data)

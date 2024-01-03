@@ -53,6 +53,9 @@ class Favorite:
         CURSOR.execute(sql, (self.movie_name, self.rating, self.user_id))
         CONN.commit()
         self.id = CURSOR.lastrowid
+    
+    #get all rows aka instances 
+    
 
     #getting instance aka row by id
     #need class methos because I am working with the whole class
@@ -79,6 +82,8 @@ class Favorite:
         except Exception as e:
             print(f'Something went wrong: {e}')
 '''
+
+#for testing
 if __name__ == "__main__":
     
     #Favorite.create_table()
@@ -97,8 +102,8 @@ if __name__ == "__main__":
 
     # it works!
     # Test get_by_id
-    retrieved_favorite = Favorite.find_by_id(3)
-    if retrieved_favorite:
-        print(f"Favorite with id 3: {retrieved_favorite.__dict__}")
-    else:
-        print("Favorite not found.")
+    #retrieved_favorite = Favorite.find_by_id(3)
+    #if retrieved_favorite:
+        #print(f"Favorite with id 3: {retrieved_favorite.__dict__}")
+    #else:
+        #print("Favorite not found.")
