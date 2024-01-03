@@ -28,24 +28,6 @@ class Favorite:
         if isinstance(num, int) and num > 0:
             self.rating = num
 
-    #### Again, not sure if either user_id or id need a setter but just in case
-    # @property
-    # def user_id(self):
-    #     return self.user_id
-    
-    # @user_id.setter
-    # def user_id(self, num: int):
-    #     if isinstance(num, int) and num > 0:
-    #         self.user_id = num
-    
-    # @property
-    # def id(self):
-    #     return self.id
-    
-    # @id.setter
-    # def id(self, num: int):
-    #     if isinstance(num, int) and num > 0:
-    #         self.id = num
 
     #creating table
     @classmethod

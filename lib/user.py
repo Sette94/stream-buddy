@@ -37,16 +37,6 @@ class User:
         if isinstance(num, int) and num > 0:
             self.age = num
 
-    #### Not sure if id needs a setter due to its nature
-    # @property
-    # def id(self):
-    #     return self.id
-    
-    # @id.setter
-    # def id(self, num: int):
-    #     if isinstance(num, int) and num > 0:
-    #         self.id = num
-
 
 
     #creating table
