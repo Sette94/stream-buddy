@@ -8,7 +8,7 @@ class Streaming:
     def __init__(self) -> None:
         self.base_props = BaseProperties()
 
-    def streaming_service(self, name):
+    def streaming_service_id(self, name):
 
         try:
             streaming_services = requests.get(
@@ -23,16 +23,17 @@ class Streaming:
             logger.error(e)
             return
 
-    def movies_by_streaming_service(self, streaming_id, year=""):
+    def movies_by_streaming_service(self, streaming_id, year="", genre_id="", actor_id=""):
 
         try:
             streaming_services = requests.get(
                 self.base_props.get_property(
-                    'streaming_endpoint')+f"&with_watch_providers={streaming_id}"+f"&primary_release_year={year}",
+                    'streaming_endpoint') +
+                f"&with_watch_providers={streaming_id}" +
+                f"&primary_release_year={year}" +
+                f"&with_genres={genre_id}" +
+                f"&with_cast={actor_id}",
                 headers=self.base_props.get_property('tmdb_headers'))
-
-            logger.info(self.base_props.get_property(
-                'streaming_endpoint')+f"&with_watch_providers={streaming_id}")
 
             return streaming_services.json()
         except Exception as e:
