@@ -128,6 +128,16 @@ class Buddy:
         console = Console()
         console.print(table)
 
+    def exit_program():
+        print("Goodbye!")
+        exit()
+
+    def genre_options(self, type):
+        if type == "1":
+            return self.genre_config.movie_genre()
+        else:
+            return self.genre_config.tv_genre()
+
 
 if __name__ == '__main__':
     buddy_instance = Buddy(streaming_service="Netflix")
@@ -136,6 +146,6 @@ if __name__ == '__main__':
     # buddy_instance.display_table_movies(movies_data)
 
     tv_data = buddy_instance.tv_in_streaming(
-        year="1999", genre_name="Comedy"
+        year="1999", genre_name="Action &"
     )
     buddy_instance.display_table_tv(tv_data)
