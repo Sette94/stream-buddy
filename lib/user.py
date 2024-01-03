@@ -4,10 +4,11 @@
 from connection import CONN, CURSOR
 
 class User:
-    def __init__(self, first_name, last_name, age):
+    def __init__(self, first_name, last_name, age, id=None):
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
+        self.id = id
 
     #creating table
     @classmethod
@@ -42,12 +43,12 @@ class User:
 
 
 if __name__ == "__main__":
-    User.create_table()
+    #User.create_table()
     #User.drop_table()
 
  # Create an instance of the User class and add data to the users table
-    user_instance = User(first_name='John', last_name='Doe', age=25)
-    user_instance.user_data()
+    #user_instance = User(first_name='John', last_name='Doe', age=25)
+    #user_instance.user_data()
 
 
 
