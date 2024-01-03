@@ -39,20 +39,14 @@ class Buddy:
 
     def movies_in_streaming(self, year="", genre_name="", actor_name=""):
 
-        # Returns an id for the initalized streaming service (Netflix = 8)
         streaming_id = self.streaming_config.streaming_service_id(
             self.streaming_service)
 
-        # genre_config.genre_id(genre_name) like streaming_config.streaming_service_id takes a genre name and returns an id
-        # Returns a list of object, movies based on streaming_id, released year, genre_id
         movies_by_service = self.streaming_config.movies_by_streaming_service(
             streaming_id,
             year,
-            self.genre_config.genre_id(genre_name),
+            self.genre_config.genre_id_movie(genre_name),
             self.actor_config.actor_id(actor_name.replace(" ", "%20")))
-
-        # for movie in movies_by_service.get("results"):
-        #     logger.info(movie.get('original_title')+": "+movie.get('overview'))
 
         return movies_by_service.get("results")
 
@@ -64,7 +58,7 @@ class Buddy:
         tv_by_service = self.streaming_config.tv_by_streaming_service(
             streaming_id,
             year,
-            self.genre_config.genre_id(genre_name))
+            self.genre_config.genre_id_tv(genre_name))
 
         return tv_by_service.get("results")
 
@@ -134,11 +128,12 @@ class Buddy:
 
 
 buddy_instance = Buddy(streaming_service="Netflix")
-tv_data = buddy_instance.tv_in_streaming(
-    year="1999", genre_name=""
-)
-buddy_instance.display_table_tv(tv_data)
-
 movies_data = buddy_instance.movies_in_streaming(
-    genre_name="", year="2023", actor_name="")
+    genre_name="Comedy", year="", actor_name="")
 buddy_instance.display_table_movies(movies_data)
+
+
+# tv_data = buddy_instance.tv_in_streaming(
+#     year="2022", genre_name="Comedy"
+# )
+# buddy_instance.display_table_tv(tv_data)
