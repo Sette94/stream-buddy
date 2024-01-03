@@ -4,11 +4,48 @@ from connection import CONN, CURSOR
 
 
 class Favorite:
-    def __init__(self, movie_name, rating, user_id=None, id=None):
+    def __init__(self, movie_name: str, rating: int, user_id=None, id=None):
         self.movie_name = movie_name
         self.rating = rating
         self.user_id = user_id
         self.id = id
+    
+    @property
+    def movie_name(self):
+        return self.movie_name
+    
+    @movie_name.setter
+    def movie_name(self, name: str):
+        if isinstance(name, str) and len(name) > 0:
+            self.movie_name = name
+    
+    @property
+    def rating(self):
+        return self.rating
+    
+    @rating.setter
+    def rating(self, num: int):
+        if isinstance(num, int) and num > 0:
+            self.rating = num
+
+    #### Again, not sure if either user_id or id need a setter but just in case
+    # @property
+    # def user_id(self):
+    #     return self.user_id
+    
+    # @user_id.setter
+    # def user_id(self, num: int):
+    #     if isinstance(num, int) and num > 0:
+    #         self.user_id = num
+    
+    # @property
+    # def id(self):
+    #     return self.id
+    
+    # @id.setter
+    # def id(self, num: int):
+    #     if isinstance(num, int) and num > 0:
+    #         self.id = num
 
     #creating table
     @classmethod

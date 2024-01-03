@@ -4,7 +4,7 @@
 from connection import CONN, CURSOR
 
 class User:
-    def __init__(self, first_name: str, last_name: str, age: int, id: int=None):
+    def __init__(self, first_name: str, last_name: str, age: int, id=None):
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
@@ -27,6 +27,26 @@ class User:
     def last_name(self, name: str):
         if isinstance(name, str) and len(name) > 0:
             self.last_name = name
+
+    @property
+    def age(self):
+        return self.age
+    
+    @age.setter
+    def age(self, num: int):
+        if isinstance(num, int) and num > 0:
+            self.age = num
+
+    #### Not sure if id needs a setter due to its nature
+    # @property
+    # def id(self):
+    #     return self.id
+    
+    # @id.setter
+    # def id(self, num: int):
+    #     if isinstance(num, int) and num > 0:
+    #         self.id = num
+
 
 
     #creating table
