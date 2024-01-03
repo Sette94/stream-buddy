@@ -4,11 +4,50 @@
 from connection import CONN, CURSOR
 
 class User:
-    def __init__(self, first_name, last_name, age, id=None):
+    def __init__(self, first_name: str, last_name: str, age: int, id=None):
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
         self.id = id
+
+    @property
+    def first_name(self):
+        return self.first_name
+    
+    @first_name.setter
+    def first_name(self, name: str):
+        if isinstance(name, str) and len(name) > 0:
+            self.first_name = name
+    
+    @property
+    def last_name(self):
+        return self.last_name
+    
+    @last_name.setter
+    def last_name(self, name: str):
+        if isinstance(name, str) and len(name) > 0:
+            self.last_name = name
+
+    @property
+    def age(self):
+        return self.age
+    
+    @age.setter
+    def age(self, num: int):
+        if isinstance(num, int) and num > 0:
+            self.age = num
+
+    #### Not sure if id needs a setter due to its nature
+    # @property
+    # def id(self):
+    #     return self.id
+    
+    # @id.setter
+    # def id(self, num: int):
+    #     if isinstance(num, int) and num > 0:
+    #         self.id = num
+
+
 
     #creating table
     @classmethod
