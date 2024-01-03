@@ -47,8 +47,8 @@ if __name__ == "__main__":
     #User.drop_table()
 
  # Create an instance of the User class and add data to the users table
-    #user_instance = User(first_name='John', last_name='Doe', age=25)
-    #user_instance.user_data()
+    user_instance = User(first_name='John', last_name='Doe', age=25)
+    user_instance.user_data()
 
 
 

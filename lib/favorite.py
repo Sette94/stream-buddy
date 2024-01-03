@@ -50,6 +50,17 @@ class Favorite:
         CURSOR.execute(sql,(self.movie_name, self.rating, self.user_id))
         CONN.commit()
 
+    def add_user(self, user):
+        try:
+            sql = """ 
+                UPDATE favorites SET user_id=? WHERE id=?;
+            """
+            CURSOR.execute(sql, (user.id, self.id))
+            CONN.commit()
+            self.user_id = user.id
+        except Exception as e:
+            print(f'Something went wrong: {e}')
+
 if __name__ == "__main__":
     Favorite.create_table()
     #Favorite.drop_table()
@@ -57,3 +68,5 @@ if __name__ == "__main__":
 # add data to the users table
     favorite_instance = Favorite(movie_name='Test', rating=5)
     favorite_instance.favorite_data()
+    favorite1 = Favorite(movie_name='Need For Speed', rating=4)
+    favorite1.add_user(1)
