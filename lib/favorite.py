@@ -54,8 +54,17 @@ class Favorite:
         CONN.commit()
         self.id = CURSOR.lastrowid
     
-    #get all rows aka instances 
-    
+    #get all rows aka instances
+    ##need class methos because I am working with the whole class
+    @classmethod
+    def get_all(cls):
+           sql = """ 
+           SELECT * FROM favorites;
+           """
+           rows = CURSOR.execute(sql).fetchall() 
+           #turn list into list of instances 
+           return [cls.favorite_instance(row) for row in rows]
+
 
     #getting instance aka row by id
     #need class methos because I am working with the whole class
@@ -100,10 +109,22 @@ if __name__ == "__main__":
     #favorite_instance = Favorite(movie_name='Movie3', rating=1)
     #favorite_instance.saving_favorite_data()
 
+    #it works!
+    # Testing get_all
+    all_favorites = Favorite.get_all()
+
+    if all_favorites:
+        for favorite in all_favorites:
+            print(f"Favorite instance: {favorite.__dict__}")
+    else:
+        print("No favorites found.")
+
     # it works!
-    # Test get_by_id
+    # Testing get_by_id
     #retrieved_favorite = Favorite.find_by_id(3)
     #if retrieved_favorite:
         #print(f"Favorite with id 3: {retrieved_favorite.__dict__}")
     #else:
         #print("Favorite not found.")
+    
+
