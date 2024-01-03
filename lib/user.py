@@ -32,6 +32,17 @@ class User:
         """
         CURSOR.execute(sql)
         CONN.commit()
+
+    #creating instance of the user class
+    @classmethod 
+    def user_instance(cls, row):
+        user = cls(
+            id=row[0],
+            first_name=row[1],
+            last_name=row[2],
+            age=row[3],
+        )
+        return user 
         
     def user_data(self):
         sql = """
@@ -40,14 +51,48 @@ class User:
         """
         CURSOR.execute(sql,(self.first_name, self.last_name, self.age))
         CONN.commit()
+    
+    #get all rows aka instances
+    ##need class methos because I am working with the whole class
+    @classmethod
+    def get_all(cls):
+           sql = """ 
+           SELECT * FROM users;
+           """
+           rows = CURSOR.execute(sql).fetchall() 
+           #turn list into list of instances 
+           return [cls.user_instance(row) for row in rows]
+
+
+    #getting instance aka row by id
+    #need class method because I am working with the whole class
+    @classmethod
+    def find_user_by_id(cls, id):
+        sql = """ 
+            SELECT * FROM users WHERE id=?;
+        """
+        row = CURSOR.execute(sql, (id, )).fetchone() 
+        if not row:
+            return None
+        else:
+            return cls.user_instance(row)
+
+    #deleting instance aka row by id
+    #again need class because I am working with the whole class
+    def delete_by_id(cls,id):
+        sql = """ 
+        DELETE FROM users WHERE id=?;
+        """
+        CURSOR.execute(sql, (id, ))
+        CONN.commit()
 
 
     #need to debug!!
-#     @classmethod
-#     def find_user_by_id(cls,id):
+     # @classmethod
+     # def find_user_by_id(cls,id):
        
-    
-# if __name__ == "__main__":
+
+#if __name__ == "__main__":
     #User.create_table()
     #User.drop_table()
 
