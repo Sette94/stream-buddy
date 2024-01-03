@@ -43,11 +43,11 @@ class User:
 
 
     #need to debug!!
-    @classmethod
-    def find_user_by_id(cls,id):
+#     @classmethod
+#     def find_user_by_id(cls,id):
        
     
-if __name__ == "__main__":
+# if __name__ == "__main__":
     #User.create_table()
     #User.drop_table()
 
