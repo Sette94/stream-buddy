@@ -90,7 +90,7 @@ def main():
                 main_menu()
 
         elif choice == "2":
-            print("Empty")
+            print("CRUD")
         else:
             print("Invalid choice")
 
