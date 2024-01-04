@@ -9,21 +9,21 @@ class Favorite:
     
     @property
     def movie_name(self):
-        return self.movie_name
+        return self._movie_name
     
     @movie_name.setter
     def movie_name(self, name: str):
         if isinstance(name, str) and len(name) > 0:
-            self.movie_name = name
+            self._movie_name = name
     
     @property
     def rating(self):
-        return self.rating
+        return self._rating
     
     @rating.setter
     def rating(self, num: int):
         if isinstance(num, int) and num > 0:
-            self.rating = num
+            self._rating = num
 
 
     #creating table
@@ -148,8 +148,9 @@ if __name__ == "__main__":
     #favorite_instance = Favorite(movie_name='BBB', rating=2)
     #favorite_instance.saving_favorite_data()
 
-    #favorite_instance = Favorite(movie_name='CCC', rating=1)
+    # favorite_instance = Favorite(movie_name='CCC', rating=1)
     #favorite_instance.saving_favorite_data()
+    
 
     #it works!
     #Testing get_all
@@ -190,17 +191,17 @@ if __name__ == "__main__":
 
     # testing user instance passed to favorite
     # Assuming you have instances of Favorite with ID 2 and a User with ID 3
-    favorite_instance = Favorite.find_favorite_by_id(3)
+    favorite_instance = Favorite.find_favorite_by_id(2)
 
-   # Create a user-like dictionary for testing
-    user_id_for_testing = 1
+    #Create a user-like dictionary for testing
+    user_id_for_testing = 8
 
     # Check if the favorite instance is found
     if favorite_instance:
-        # Add the user (with ID 3) to the favorite
+        #Add the user (with ID 3) to the favorite
         favorite_instance.add_user(user_id_for_testing)
-        # printing message
+        #printing message
         print(f"User ID associated with Favorite ID 2: {favorite_instance.user_id}")
     else:
-        # printing error message
+        #printing error message
         print("Favorite not found.")

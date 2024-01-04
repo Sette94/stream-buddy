@@ -9,30 +9,30 @@ class User:
 
     @property
     def first_name(self):
-        return self.first_name
+        return self._first_name
     
     @first_name.setter
     def first_name(self, name: str):
         if isinstance(name, str) and len(name) > 0:
-            self.first_name = name
+            self._first_name = name
     
     @property
     def last_name(self):
-        return self.last_name
+        return self._last_name
     
     @last_name.setter
     def last_name(self, name: str):
         if isinstance(name, str) and len(name) > 0:
-            self.last_name = name
+            self._last_name = name
 
     @property
     def age(self):
-        return self.age
+        return self._age
     
     @age.setter
     def age(self, num: int):
         if isinstance(num, int) and num > 0:
-            self.age = num
+            self._age = num
 
 
 
@@ -114,7 +114,7 @@ class User:
         CONN.commit()
 
     
-#if __name__ == "__main__":
+if __name__ == "__main__":
     #User.create_table()
     #User.drop_table()
 
