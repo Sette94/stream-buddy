@@ -11,40 +11,40 @@ class User:
 
     @property
     def first_name(self):
-        return self.first_name
+        return self._first_name
 
     @first_name.setter
     def first_name(self, name: str):
         if isinstance(name, str) and len(name) > 0:
-            self.first_name = name
+            self._first_name = name
 
     @property
     def last_name(self):
-        return self.last_name
+        return self._last_name
 
     @last_name.setter
     def last_name(self, name: str):
         if isinstance(name, str) and len(name) > 0:
-            self.last_name = name
+            self._last_name = name
 
     @property
     def age(self):
-        return self.age
+        return self._age
 
     @age.setter
     def age(self, num: int):
         if isinstance(num, int) and num > 0:
-            self.age = num
+            self._age = num
 
     # Setting property for username
     @property
     def user_name(self):
-        return self.user_name
+        return self._user_name
 
     @user_name.setter
     def user_name(self, name: str):
         if isinstance(name, str) and len(name) > 0 and not hasattr(self, "user_name"):
-            self.user_name = name
+            self._user_name = name
 
     # creating table
 
@@ -141,43 +141,46 @@ class User:
         CONN.commit()
 
 
-# if __name__ == "__main__":
-    # User.create_table()
-    # User.drop_table()
+if __name__ == "__main__":
+    User.drop_table()
+    User.create_table()
 
     # Create an instance of the User class and add data to the users table
-    # user_instance = User(first_name='John', last_name='Doe', age=25)
-    # user_instance.user_data()
+    user_instance = User(
+        first_name='Gabe', last_name='Wortmann', age=18, user_name='GabetheGreat')
+    user_instance.user_data()
 
-    # user_instance = User(first_name='Jane', last_name='Doe', age=30)
-    # user_instance.user_data()
+    user_instance = User(first_name='Dorahely',
+                         last_name='Sanchez', age=27, user_name='DorahelyS')
+    user_instance.user_data()
 
-    # user_instance = User(first_name='June', last_name='Doe', age=54)
-    # user_instance.user_data()
+    user_instance = User(first_name='Nick', last_name='Sette',
+                         age=29, user_name='Sette94')
+    user_instance.user_data()
 
     # it works!
     # Testing get_all
     # all_users = User.get_all()
 
     # if all_users:
-        # for user in all_users:
-        # print(f"User instance: {user.__dict__}")
+    # for user in all_users:
+    # print(f"User instance: {user.__dict__}")
     # else:
-        # print("No users found.")
+    # print("No users found.")
 
     # it works!
     # Testing get_by_id
     # retrieved_user = User.find_user_by_id(2)
     # if retrieved_user:
-        # print(f"User with id 2: {retrieved_user.__dict__}")
+    # print(f"User with id 2: {retrieved_user.__dict__}")
     # else:
-        # print("User not found.")
+    # print("User not found.")
 
     # Testing delete_by_id
     # Print all instances before deletion - run this to see list before deleting one
     # print("Before Deletion:")
     # for user in User.get_all():
-        # print(f"ID: {user.id}, User First Name: {user.first_name}, User Last Name: {user.last_name}")
+    # print(f"ID: {user.id}, User First Name: {user.first_name}, User Last Name: {user.last_name}")
 
     # It works!
     # Choosing the ID I want to delete
@@ -189,4 +192,4 @@ class User:
     # Print all instances after deletion
     # print("\nAfter Deletion:")
     # for user in User.get_all():
-        # print(f"ID: {user.id}, User First Name: {user.first_name}, User Last Name: {user.last_name}")
+    # print(f"ID: {user.id}, User First Name: {user.first_name}, User Last Name: {user.last_name}")

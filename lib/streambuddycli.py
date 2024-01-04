@@ -1,5 +1,7 @@
 from classes.helpers.buddy import Buddy
 from classes.helpers.audio_helper import Audio
+from user import User
+from favorite import Favorite
 
 
 def main():
@@ -90,7 +92,35 @@ def main():
                 main_menu()
 
         elif choice == "2":
-            print("CRUD")
+            user_name = input("Please sign in with username: ")
+
+            signed_in_user_id = [
+                user.id for user in User.get_all() if user_name == user.user_name][0]  # Id from User table of the user signed in
+
+            set_a_favorite = input("Do you want to set an input: ")
+
+            if set_a_favorite == "yes":
+                # Setting a favorite
+                favorite_instance = Favorite.find_favorite_by_id(
+                    3)  # Default setting the movie Twilight for now
+
+                # Check if the favorite instance is found
+                if favorite_instance:
+                    # Add the user (with ID 3) to the favorite
+                    favorite_instance.add_user(signed_in_user_id)
+                    # printing message
+                    print(
+                        f"User ID associated with Favorite ID 3: {favorite_instance.user_id}")
+                else:
+                    # printing error message
+                    print("Favorite not found.")
+
+            users_favorite_movies = Favorite.find_favorite_by_userid(
+                signed_in_user_id)
+
+            favorites = [movies.movie_name for movies in users_favorite_movies]
+            print(favorites)
+
         else:
             print("Invalid choice")
 
