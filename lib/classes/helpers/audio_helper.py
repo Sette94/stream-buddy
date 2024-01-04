@@ -51,7 +51,7 @@ class Audio:
           | |   | |                                
           |_|   |_|                             
             '''],
-        "HBO Max": ['lib/audio/HBO.mp3', '''
+        "Max": ['lib/audio/HBO.mp3', '''
              __  __          __   __
             |  \/  |   /\    \ \ / /
             | \  / |  /  \    \ V / 
