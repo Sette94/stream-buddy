@@ -1,13 +1,12 @@
 import logging
-from properties import BaseProperties
-from streaming import Streaming
-from genre import Genre
-from actor import Actor
+from props.properties import BaseProperties
+from classes.configs.streaming import Streaming
+from classes.configs.genre import Genre
+from classes.configs.actor import Actor
 from rich.console import Console
 from rich.table import Table
 from rich import box
 from rich.style import Style
-
 
 FORMAT = '%(asctime)-15s %(filename)s - %(lineno)d - %(message)s'
 logging.basicConfig(level=logging.INFO, format=FORMAT)
@@ -15,35 +14,35 @@ logger = logging.getLogger(__name__)
 
 
 class Buddy:
-    def __init__(self, streaming_service) -> None:
+    def __init__(self, streaming_service_name) -> None:
         self.base_props = BaseProperties()
         self.streaming_config = Streaming()
         self.genre_config = Genre()
         self.actor_config = Actor()
-        self.streaming_service = streaming_service
+        self.streaming_service_name = streaming_service_name
+        self.streaming_service_id = self.streaming_config.streaming_service_id(
+            streaming_service_name)
 
     @property
-    def streaming_service(self):
-        return self._streaming_service
+    def streaming_service_id(self):
+        return self._streaming_service_id
 
-    @streaming_service.getter
-    def streaming_service(self):
-        return self._streaming_service
+    @streaming_service_id.getter
+    def streaming_service_id(self):
+        return self._streaming_service_id
 
-    @streaming_service.setter
-    def streaming_service(self, val):
-        if isinstance(val, str):
-            self._streaming_service = val
+    @streaming_service_id.setter
+    def streaming_service_id(self, val):
+        if isinstance(val, int):
+            self._streaming_service_id = val
         else:
-            raise ValueError("Streaming service should be a string.")
+            raise ValueError(
+                f"Streaming service {self.streaming_service_name} is not valid. Here are some popular ones:\nNetflix\nHulu\nAmazon Prime Video\nParamount Plus\nApple TV Plus")
 
     def movies_in_streaming(self, year="", genre_name="", actor_name=""):
 
-        streaming_id = self.streaming_config.streaming_service_id(
-            self.streaming_service)
-
         movies_by_service = self.streaming_config.movies_by_streaming_service(
-            streaming_id,
+            self.streaming_service_id,
             year,
             self.genre_config.genre_id_movie(genre_name),
             self.actor_config.actor_id(actor_name.replace(" ", "%20")))
@@ -52,18 +51,15 @@ class Buddy:
 
     def tv_in_streaming(self, year="", genre_name=""):
 
-        streaming_id = self.streaming_config.streaming_service_id(
-            self.streaming_service)
-
         tv_by_service = self.streaming_config.tv_by_streaming_service(
-            streaming_id,
+            self.streaming_service_id,
             year,
             self.genre_config.genre_id_tv(genre_name))
 
         return tv_by_service.get("results")
 
     def display_table_movies(self, movies):
-        table = Table(title=self.streaming_service,
+        table = Table(title=self.streaming_service_name,
                       box=box.HEAVY, show_lines=True)
 
         title_style = Style(color="White", bold=True, underline=True)
@@ -96,7 +92,7 @@ class Buddy:
         console.print(table)
 
     def display_table_tv(self, tvs):
-        table = Table(title=self.streaming_service,
+        table = Table(title=self.streaming_service_name,
                       box=box.HEAVY, show_lines=True)
 
         title_style = Style(color="White", bold=True, underline=True)
@@ -140,12 +136,14 @@ class Buddy:
 
 
 if __name__ == '__main__':
-    buddy_instance = Buddy(streaming_service="Netflix")
-    # movies_data = buddy_instance.movies_in_streaming(
-    #     genre_name="Comedy", year="", actor_name="")
-    # buddy_instance.display_table_movies(movies_data)
+    buddy_instance = Buddy(streaming_service_name="Netflix")
+    print(buddy_instance.streaming_service_id)
 
-    tv_data = buddy_instance.tv_in_streaming(
-        year="1999", genre_name="Action &"
-    )
-    buddy_instance.display_table_tv(tv_data)
+    movies_data = buddy_instance.movies_in_streaming(
+        genre_name="Comedy", year="", actor_name="")
+    buddy_instance.display_table_movies(movies_data)
+
+    # tv_data = buddy_instance.tv_in_streaming(
+    #     year="1999", genre_name="Action &"
+    # )
+    # buddy_instance.display_table_tv(tv_data)

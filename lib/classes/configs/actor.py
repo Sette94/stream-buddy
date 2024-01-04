@@ -1,5 +1,5 @@
 import requests
-from properties import BaseProperties
+from props.properties import BaseProperties
 import logging
 logger = logging.getLogger(__name__)
 
