@@ -3,10 +3,12 @@ from props.properties import BaseProperties
 from classes.configs.streaming import Streaming
 from classes.configs.genre import Genre
 from classes.configs.actor import Actor
+from classes.helpers.audio_helper import Audio
 from rich.console import Console
 from rich.table import Table
 from rich import box
 from rich.style import Style
+
 
 FORMAT = '%(asctime)-15s %(filename)s - %(lineno)d - %(message)s'
 logging.basicConfig(level=logging.INFO, format=FORMAT)
@@ -37,7 +39,7 @@ class Buddy:
             self._streaming_service_id = val
         else:
             raise ValueError(
-                f"Streaming service {self.streaming_service_name} is not valid. Here are some popular ones:\nNetflix\nHulu\nAmazon Prime Video\nParamount Plus\nApple TV Plus")
+                f"Streaming service {self.streaming_service_name} is not valid. Here are some popular ones:\nNetflix\nHulu\nAmazon Prime Video\nParamount Plus\nApple TV Plus\nHBO Max")
 
     def movies_in_streaming(self, year="", genre_name="", actor_name=""):
 
@@ -125,6 +127,8 @@ class Buddy:
         console.print(table)
 
     def exit_program():
+        Audio.play_audio(
+            'lib/audio/AOL_GoodBye.mp3')
         print("Goodbye!")
         exit()
 

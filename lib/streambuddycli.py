@@ -1,4 +1,5 @@
 from classes.helpers.buddy import Buddy
+from classes.helpers.audio_helper import Audio
 
 
 def main():
@@ -23,6 +24,8 @@ def main():
             # Type in a streaming service, init Buddy with the service
             streamingchoice = input("Please add streaming service: ")
             buddy_instance = Buddy(streaming_service_name=streamingchoice)
+
+            Audio.play_audio(Audio.audio_convert.get((streamingchoice)))
 
             tv_movie()  # User can select if they would like to search by Moive or Tv
             tv_or_movie = input("Movie(1) or Tv(2): ")
