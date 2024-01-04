@@ -143,8 +143,6 @@ class Favorite:
                 CURSOR.execute(update_sql, (user_id, self.id))
                 CONN.commit()
                 self.user_id = user_id
-                print(
-                    f"User with ID {user_id} associated with Favorite with ID {self.id} successfully.")
             else:
                 print(
                     f"User with ID {user_id} does not exist. No update performed.")

@@ -98,13 +98,14 @@ def main():
 
             if db_choice == "1":
 
-                user_name = input("Please sign in with username: ")
+                user_name = input(
+                    "Please sign in with username to see favorites: ")
 
                 signed_in_user_id = [
                     user.id for user in User.get_all() if user_name == user.user_name][0]  # Id from User table of the user signed in
 
                 set_a_favorite = input(
-                    "Do you want to set an favorite (yes,no): ")
+                    "Do you want to set a new favorite (yes,no): ")
 
                 if set_a_favorite == "yes":
                     user_movie = input("Add a movie: ")
@@ -117,8 +118,6 @@ def main():
                     # Check if the favorite instance is found
                     if favorite_instance:
                         favorite_instance.add_user(signed_in_user_id)
-                        print(
-                            f"User ID associated with Favorite ID: {favorite_instance.user_id}")
                     else:
                         print("Favorite not found.")
 
@@ -128,7 +127,11 @@ def main():
                 favorites = [
                     movies.movie_name for movies in users_favorite_movies]
                 if favorites:
-                    print(favorites)
+                    print(f"Here is a list of {user_name}'s favorite movies")
+                    # Start index from 1
+                    for index, value in enumerate(favorites, 1):
+                        print(f"{index}. {value}")
+                    print()
                 else:
                     print(f"{user_name} does not have any favorites")
 
@@ -184,7 +187,7 @@ def main():
 def main_menu():
     print("Please select an option:")
     print("1. Use StreamBuddy")
-    print("2. DB Work")
+    print("2. View Favorites Database")
     print("0. Exit the program")
 
 
