@@ -113,6 +113,14 @@ class User:
         CURSOR.execute(sql, (id, ))
         CONN.commit()
 
+    @classmethod
+    def delete_by_user_name(cls, user_name):
+        sql = """ 
+        DELETE FROM users WHERE user_name=?;
+        """
+        CURSOR.execute(sql, (user_name, ))
+        CONN.commit()
+
     
 if __name__ == "__main__":
     #User.create_table()
@@ -146,20 +154,41 @@ if __name__ == "__main__":
     #else:
         #print("User not found.")
 
+    #It works!
     #Testing delete_by_id
+
     #Print all instances before deletion - run this to see list before deleting one
     #print("Before Deletion:")
     #for user in User.get_all():
-        #print(f"ID: {user.id}, User First Name: {user.first_name}, User Last Name: {user.last_name}")
+        #print(f"ID: {user.id}, User First Name: {user.first_name}, User Last Name: {user.last_name}, User Name: {user.user_name}")
     
-    # It works!
-    # Choosing the ID I want to delete
+    #Choosing the ID I want to delete
     #user_id_to_delete = 2
 
-    # Delete the instance with the specified ID
+    #Delete the instance with the specified ID
     #User.delete_by_id(user_id_to_delete)
 
     # Print all instances after deletion
     #print("\nAfter Deletion:")
     #for user in User.get_all():
-        #print(f"ID: {user.id}, User First Name: {user.first_name}, User Last Name: {user.last_name}")
+        #print(f"ID: {user.id}, User First Name: {user.first_name}, User Last Name: {user.last_name}, User Name: {user.user_name}")
+    
+
+    #Testing delete_by_user_name
+
+    #Print all instances before deletion - run this to see list before deleting one
+    #print("Before Deletion:")
+    #for user in User.get_all():
+        #print(f"ID: {user.id}, User First Name: {user.first_name}, User Last Name: {user.last_name}, User Name: {user.user_name}")
+
+    #Choosining the User Name I want to delete
+    #user_user_name_to_delete = DorahelyS
+
+    #Delete the instance with the specified User Name
+    #User.delete_by_user_name(user_user_name_to_delete)
+
+
+    # Print all instances after deletion
+    #print("\nAfter Deletion:")
+    #for user in User.get_all():
+        #print(f"ID: {user.id}, User First Name: {user.first_name}, User Last Name: {user.last_name}, User Name: {user.user_name}")
