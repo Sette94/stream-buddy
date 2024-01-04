@@ -26,9 +26,10 @@ def main():
             streamingchoice = input("Please add streaming service: ")
             buddy_instance = Buddy(streaming_service_name=streamingchoice)
 
-            print(Audio.audio_visual_convert.get(streamingchoice)[1])
-            Audio.play_audio(
-                Audio.audio_visual_convert.get(streamingchoice)[0])
+            if Audio.audio_visual_convert.get(streamingchoice):
+                print(Audio.audio_visual_convert.get(streamingchoice)[1])
+                Audio.play_audio(
+                    Audio.audio_visual_convert.get(streamingchoice)[0])
 
             tv_movie()  # User can select if they would like to search by Moive or Tv
             tv_or_movie = input("Movie(1) or Tv(2): ")
