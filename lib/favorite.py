@@ -1,8 +1,5 @@
 from connection import CONN, CURSOR
 
-#from user import User
-
-
 class Favorite:
     def __init__(self, movie_name: str, rating: int, user_id=None, id=None):
         self.movie_name = movie_name
@@ -39,7 +36,7 @@ class Favorite:
                 movie_name TEXT,
                 rating INTEGER,
                 user_id INTEGER,
-                    FOREIGN KEY(user_id) REFERENCES users(id)
+                FOREIGN KEY(user_id) REFERENCES users(id)
             );
         """
         CURSOR.execute(sql)
@@ -64,6 +61,7 @@ class Favorite:
         )
         return favorite 
 
+    #saving the values to each instance which means I do not use a classmethod
     def saving_favorite_data(self):
         sql = """
             INSERT INTO favorites(movie_name, rating, user_id)
@@ -102,6 +100,7 @@ class Favorite:
 
     #deleting instance aka row by id
     #again need class because I am working with the whole class
+    #but note can also work with an instance
     @classmethod
     def delete_by_id(cls, id):
         sql = """ 
@@ -110,19 +109,31 @@ class Favorite:
         CURSOR.execute(sql, (id, ))
         CONN.commit()
 
-'''
-    def add_user(self, user):
+    #this is an instance method because it is going to operate on a single instance not the whole table
+    def add_user(self, user_id):
         try:
-            sql = """ 
-                UPDATE favorites SET user_id=? WHERE id=?;
+        # Check if the user with the specified ID exists
+            user_exists_sql = """
+                SELECT id FROM users WHERE id=?;
             """
-            CURSOR.execute(sql, (user.id, self.id))
-            CONN.commit()
-            self.user_id = user.id
+            user_exists = CURSOR.execute(user_exists_sql, (user_id,)).fetchone()
+
+            if user_exists:
+            # If user exists, update the favorite
+                update_sql = """ 
+                    UPDATE favorites SET user_id=? WHERE id=?;
+                """
+                CURSOR.execute(update_sql, (user_id, self.id))
+                CONN.commit()
+                self.user_id = user_id
+                print(f"User with ID {user_id} associated with Favorite with ID {self.id} successfully.")
+            else:
+                print(f"User with ID {user_id} does not exist. No update performed.")
         except Exception as e:
             print(f'Something went wrong: {e}')
-'''
 
+
+        
 #for testing
 if __name__ == "__main__":
     
@@ -141,7 +152,7 @@ if __name__ == "__main__":
     #favorite_instance.saving_favorite_data()
 
     #it works!
-    # Testing get_all
+    #Testing get_all
     #all_favorites = Favorite.get_all()
 
     #if all_favorites:
@@ -161,19 +172,35 @@ if __name__ == "__main__":
     # Testing delete_by_id
     # Print all instances before deletion - run this to see list before deleting one
     #print("Before Deletion:")
-    #for fav in Favorite.get_all():
-        #print(f"ID: {fav.id}, Movie Name: {fav.movie_name}, Rating: {fav.rating}")
+    #for favorite in Favorite.get_all():
+        #print(f"ID: {favorite.id}, Movie Name: {favorite.movie_name}, Rating: {favorite.rating}")
     
     # It works!
     # Choosing the ID I want to delete
-    favorite_id_to_delete = 2
+    #favorite_id_to_delete = 2
 
     # Delete the instance with the specified ID
-    Favorite.delete_by_id(favorite_id_to_delete)
+    #Favorite.delete_by_id(favorite_id_to_delete)
 
     # Print all instances after deletion
-    print("\nAfter Deletion:")
-    for fav in Favorite.get_all():
-        print(f"ID: {fav.id}, Movie Name: {fav.movie_name}, Rating: {fav.rating}")
+    #print("\nAfter Deletion:")
+    #for favorite in Favorite.get_all():
+        #print(f"ID: {favorite.id}, Movie Name: {favorite.movie_name}, Rating: {favorite.rating}")
     
 
+    # testing user instance passed to favorite
+    # Assuming you have instances of Favorite with ID 2 and a User with ID 3
+    favorite_instance = Favorite.find_favorite_by_id(3)
+
+   # Create a user-like dictionary for testing
+    user_id_for_testing = 1
+
+    # Check if the favorite instance is found
+    if favorite_instance:
+        # Add the user (with ID 3) to the favorite
+        favorite_instance.add_user(user_id_for_testing)
+        # printing message
+        print(f"User ID associated with Favorite ID 2: {favorite_instance.user_id}")
+    else:
+        # printing error message
+        print("Favorite not found.")

@@ -10,7 +10,7 @@ class BaseProperties:
         self.props_container['actor_config'] = "https://api.themoviedb.org/3/search/person?include_adult=false&language=en-US&page=1"
 
         self.props_container['movie_streaming_endpoint'] = "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=vote_count.desc&watch_region=US&with_watch_monetization_types=flatrate&with_original_language=en"
-        self.props_container['tv_streaming_endpoint'] = "https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=1&sort_by=popularity.desc&with_original_language=en"
+        self.props_container['tv_streaming_endpoint'] = "https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=1&sort_by=popularity.desc&with_original_language=en&watch_region=US"
 
         self.props_container['tmdb_headers'] = {
             "accept": "application/json",
