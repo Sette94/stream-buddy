@@ -42,6 +42,11 @@ class Streaming:
 
     def tv_by_streaming_service(self, streaming_id, year="", genre_id=""):
 
+        print(self.base_props.get_property(
+            'tv_streaming_endpoint') +
+            f"&with_watch_providers={streaming_id}" +
+            f"&first_air_date_year={year}" +
+            f"&with_genres={genre_id}")
         try:
             streaming_services = requests.get(
                 self.base_props.get_property(

@@ -20,7 +20,7 @@ def main():
                                                                                __/ |
                                                                                |___/ 
                                    Stop Scrolling!
-""")
+                """)
 
             # Type in a streaming service, init Buddy with the service
             streamingchoice = input("Please add streaming service: ")

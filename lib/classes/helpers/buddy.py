@@ -139,15 +139,15 @@ class Buddy:
             return self.genre_config.tv_genre()
 
 
-if __name__ == '__main__':
-    buddy_instance = Buddy(streaming_service_name="Netflix")
-    print(buddy_instance.streaming_service_id)
+# if __name__ == '__main__':
+#     buddy_instance = Buddy(streaming_service_name="Netflix")
+#     print(buddy_instance.streaming_service_id)
 
-    movies_data = buddy_instance.movies_in_streaming(
-        genre_name="Comedy", year="", actor_name="")
-    buddy_instance.display_table_movies(movies_data)
+#     movies_data = buddy_instance.movies_in_streaming(
+#         genre_name="Comedy", year="", actor_name="")
+#     buddy_instance.display_table_movies(movies_data)
 
-    # tv_data = buddy_instance.tv_in_streaming(
-    #     year="1999", genre_name="Action &"
-    # )
-    # buddy_instance.display_table_tv(tv_data)
+#     # tv_data = buddy_instance.tv_in_streaming(
+#     #     year="1999", genre_name="Action &"
+#     # )
+#     # buddy_instance.display_table_tv(tv_data)
