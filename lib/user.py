@@ -38,7 +38,6 @@ class User:
             self.age = num
 
 
-
     #creating table
     @classmethod
     def create_table(cls):
