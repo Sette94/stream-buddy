@@ -1,6 +1,3 @@
-#import CONN from 'connection.py'
-#import CURSOR from 'connection.py'
-
 from connection import CONN, CURSOR
 
 class User:
@@ -49,7 +46,7 @@ class User:
             INSERT INTO users(first_name, last_name, age)
             VALUES(?, ?, ?);
         """
-        CURSOR.execute(sql,(self.first_name, self.last_name, self.age))
+        CURSOR.execute(sql, (self.first_name, self.last_name, self.age))
         CONN.commit()
     
     #get all rows aka instances
@@ -79,6 +76,7 @@ class User:
 
     #deleting instance aka row by id
     #again need class because I am working with the whole class
+    @classmethod
     def delete_by_id(cls,id):
         sql = """ 
         DELETE FROM users WHERE id=?;
@@ -86,28 +84,55 @@ class User:
         CURSOR.execute(sql, (id, ))
         CONN.commit()
 
-
-    #need to debug!!
-    # @classmethod
-    # def find_user_by_id(cls,id):
        
-    
-#if __name__ == "__main__":
+#for testing purposes   
+if __name__ == "__main__":
+
     #User.create_table()
     #User.drop_table()
 
     #Create an instance of the User class and add data to the users table
     #user_instance = User(first_name='John', last_name='Doe', age=25)
     #user_instance.user_data()
+
     #user_instance = User(first_name='Jane', last_name='Doe', age=30)
     #user_instance.user_data()
+
+    #user_instance = User(first_name='June', last_name='Doe', age=54)
+    #user_instance.user_data()
+
+    #it works!
+    #Testing get_all
+    #all_users = User.get_all()
+
+    #if all_users:
+        #for user in all_users:
+            #print(f"User instance: {user.__dict__}")
+    #else:
+        #print("No users found.")
+
+    #it works!
+    #Testing get_by_id
+    #retrieved_user = User.find_user_by_id(2)
+    #if retrieved_user:
+        #print(f"User with id 2: {retrieved_user.__dict__}")
+    #else:
+        #print("User not found.")
+
+    #Testing delete_by_id
+    #Print all instances before deletion - run this to see list before deleting one
+    #print("Before Deletion:")
+    #for user in User.get_all():
+        #print(f"ID: {user.id}, User First Name: {user.first_name}, User Last Name: {user.last_name}")
     
+    # It works!
+    # Choosing the ID I want to delete
+    #user_id_to_delete = 2
 
-    #need to debug
-    #grabbing user by id
-    #existing_user = User.get_user_by_id(1)
+    # Delete the instance with the specified ID
+    #User.delete_by_id(user_id_to_delete)
 
-
-
-
-
+    # Print all instances after deletion
+    #print("\nAfter Deletion:")
+    #for user in User.get_all():
+        #print(f"ID: {user.id}, User First Name: {user.first_name}, User Last Name: {user.last_name}")
