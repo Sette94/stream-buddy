@@ -119,6 +119,7 @@ class User:
 
     # Pass in user_name and return id
 
+    @classmethod
     def find_userid_by_user_name(cls, user_name):
         sql = """ 
             SELECT id FROM users WHERE user_name=?;
@@ -127,7 +128,7 @@ class User:
         if not row:
             return None
         else:
-            return cls.user_instance(row)
+            return row
 
     # deleting instance aka row by id
     # again need class because I am working with the whole class
@@ -140,23 +141,41 @@ class User:
         CURSOR.execute(sql, (id, ))
         CONN.commit()
 
+    @classmethod
+    def delete_by_user_name(cls, user_name):
+        sql = """ 
+        DELETE FROM users WHERE user_name=?;
+        """
+        CURSOR.execute(sql, (user_name, ))
+        CONN.commit()
+
+    @classmethod
+    def update_by_user_name(cls, new_user_name, user_name):
+        sql = """ 
+            UPDATE users
+            SET user_name = ?
+            WHERE user_name=?;
+        """
+        CURSOR.execute(sql, (new_user_name, user_name))
+        CONN.commit()
+
 
 if __name__ == "__main__":
     User.drop_table()
     User.create_table()
 
     # Create an instance of the User class and add data to the users table
-    user_instance = User(
-        first_name='Gabe', last_name='Wortmann', age=18, user_name='GabetheGreat')
-    user_instance.user_data()
+    # user_instance = User(
+    #     first_name='Gabe', last_name='Wortmann', age=18, user_name='GabetheGreat')
+    # user_instance.user_data()
 
-    user_instance = User(first_name='Dorahely',
-                         last_name='Sanchez', age=27, user_name='DorahelyS')
-    user_instance.user_data()
+    # user_instance = User(first_name='Dorahely',
+    #                      last_name='Sanchez', age=27, user_name='DorahelyS')
+    # user_instance.user_data()
 
-    user_instance = User(first_name='Nick', last_name='Sette',
-                         age=29, user_name='Sette94')
-    user_instance.user_data()
+    # user_instance = User(first_name='Nick', last_name='Sette',
+    #                      age=29, user_name='Sette94')
+    # user_instance.user_data()
 
     # it works!
     # Testing get_all
