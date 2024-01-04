@@ -1,11 +1,30 @@
 from connection import CONN, CURSOR
 
 class Favorite:
-    def __init__(self, movie_name, rating, user_id=None, id=None):
+    def __init__(self, movie_name: str, rating: int, user_id=None, id=None):
         self.movie_name = movie_name
         self.rating = rating
         self.user_id = user_id
         self.id = id
+    
+    @property
+    def movie_name(self):
+        return self.movie_name
+    
+    @movie_name.setter
+    def movie_name(self, name: str):
+        if isinstance(name, str) and len(name) > 0:
+            self.movie_name = name
+    
+    @property
+    def rating(self):
+        return self.rating
+    
+    @rating.setter
+    def rating(self, num: int):
+        if isinstance(num, int) and num > 0:
+            self.rating = num
+
 
     #creating table
     @classmethod

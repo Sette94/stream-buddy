@@ -1,5 +1,5 @@
 import requests
-from properties import BaseProperties
+from props.properties import BaseProperties
 import logging
 logger = logging.getLogger(__name__)
 
@@ -17,6 +17,7 @@ class Genre:
 
             genre_dict = {item['name']: item['id']
                           for item in genres.json()['genres']}
+
             return genre_dict
         except Exception as e:
             logger.error(e)
