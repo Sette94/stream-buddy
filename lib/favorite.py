@@ -155,13 +155,13 @@ if __name__ == "__main__":
     Favorite.drop_table()
     Favorite.create_table()
 
-    favorite_instance = Favorite(movie_name='Cape Fear', rating=5)
+    favorite_instance = Favorite(movie_name='Cape Fear', rating=5, user_id=3)
     favorite_instance.saving_favorite_data()
 
-    favorite_instance = Favorite(movie_name='Barbie', rating=4)
+    favorite_instance = Favorite(movie_name='Barbie', rating=4, user_id=1)
     favorite_instance.saving_favorite_data()
 
-    favorite_instance = Favorite(movie_name='Twilight', rating=3)
+    favorite_instance = Favorite(movie_name='Twilight', rating=3, user_id=2)
     favorite_instance.saving_favorite_data()
 
     # it works!
