@@ -203,18 +203,18 @@ if __name__ == "__main__":
     # testing user instance passed to favorite
     # Assuming you have instances of Favorite with ID 2 and a User with ID 3
 
-    favorite_instance = Favorite.find_favorite_by_id(3)
+#     favorite_instance = Favorite.find_favorite_by_id(3)
 
-#    Create a user-like dictionary for testing
-    user_id_for_testing = 1
+# #    Create a user-like dictionary for testing
+#     user_id_for_testing = 1
 
-    # Check if the favorite instance is found
-    if favorite_instance:
-        # Add the user (with ID 3) to the favorite
-        favorite_instance.add_user(user_id_for_testing)
-        # printing message
-        print(
-            f"User ID associated with Favorite ID 2: {favorite_instance.user_id}")
-    else:
-        # printing error message
-        print("Favorite not found.")
+#     # Check if the favorite instance is found
+#     if favorite_instance:
+#         # Add the user (with ID 3) to the favorite
+#         favorite_instance.add_user(user_id_for_testing)
+#         # printing message
+#         print(
+#             f"User ID associated with Favorite ID 2: {favorite_instance.user_id}")
+#     else:
+#         # printing error message
+#         print("Favorite not found.")

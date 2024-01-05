@@ -124,9 +124,9 @@ def main():
                 users_favorite_movies = Favorite.find_favorite_by_userid(
                     signed_in_user_id)
 
-                favorites = [
-                    movies.movie_name for movies in users_favorite_movies]
-                if favorites:
+                if users_favorite_movies:
+                    favorites = [
+                        movies.movie_name for movies in users_favorite_movies]
                     print(f"Here is a list of {user_name}'s favorite movies")
                     # Start index from 1
                     for index, value in enumerate(favorites, 1):
